@@ -7,9 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Locale {
+  EN
+  RU
+}
+
 model Profile {
   id          Int          @id @default(autoincrement())
-  slug        String       @unique
+  slug        String
+  locale      Locale       @default(EN)
   name        String
   title       String
   description String
@@ -19,6 +25,8 @@ model Profile {
   skills      Skill[]
   experience  Experience[]
   projects    Project[]
+
+  @@unique([slug, locale])
 }
 
 model Skill {

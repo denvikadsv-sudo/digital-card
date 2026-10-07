@@ -24,6 +24,8 @@ query {
 }
 ```
 
+Content is available in English (default) and Russian: `profile(locale: RU) { ... }`.
+
 ## Local development
 
 ```bash
@@ -38,7 +40,7 @@ npm run start:dev
 ```
 prisma/
   schema.prisma, migrations/   data model and SQL migrations
-  seed-data.ts                 my data (edit this file)
+  seed-data.ts                 my data in every locale (edit this file)
   seed.ts                      idempotent seeding: upsert profile, replace children in a transaction
 src/
   prisma/                      global PrismaService
@@ -49,3 +51,4 @@ src/
 - Resolvers contain no queries: they delegate to services.
 - `skills`, `experience` and `projects` are `@ResolveField`s: they hit the database only when the client selects them.
 - `endDate: null` means the position is current.
+- Localization: `Profile` is unique per `(slug, locale)` and owns its own skills, experience and projects, so adding a language is a new entry in `prisma/seed-data.ts` plus a `Locale` enum value.

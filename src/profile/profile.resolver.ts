@@ -1,10 +1,11 @@
-import { Query, ResolveField, Resolver, Parent } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { ExperienceModel } from '../experience/experience.model';
 import { ExperienceService } from '../experience/experience.service';
 import { ProjectModel } from '../projects/project.model';
 import { ProjectsService } from '../projects/projects.service';
 import { SkillModel } from '../skills/skill.model';
 import { SkillsService } from '../skills/skills.service';
+import { Locale } from './locale.enum';
 import { ProfileModel } from './models/profile.model';
 import { ProfileService } from './profile.service';
 
@@ -18,8 +19,8 @@ export class ProfileResolver {
   ) {}
 
   @Query(() => ProfileModel)
-  profile() {
-    return this.profiles.getMain();
+  profile(@Args('locale', { type: () => Locale, defaultValue: Locale.EN }) locale: Locale) {
+    return this.profiles.getMain(locale);
   }
 
   @ResolveField('skills', () => [SkillModel])

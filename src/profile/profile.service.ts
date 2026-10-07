@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Locale } from './locale.enum';
 
 export const DEFAULT_PROFILE_SLUG = 'main';
 
@@ -7,9 +8,11 @@ export const DEFAULT_PROFILE_SLUG = 'main';
 export class ProfileService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getMain() {
-    const profile = await this.prisma.profile.findUnique({ where: { slug: DEFAULT_PROFILE_SLUG } });
-    if (!profile) throw new NotFoundException('Profile is not seeded yet');
+  async getMain(locale: Locale) {
+    const profile = await this.prisma.profile.findUnique({
+      where: { slug_locale: { slug: DEFAULT_PROFILE_SLUG, locale } },
+    });
+    if (!profile) throw new NotFoundException(`Profile (${locale}) is not seeded yet`);
     return profile;
   }
 }
