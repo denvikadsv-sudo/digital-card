@@ -68,9 +68,9 @@ export const seedByLocale: Record<
         description: 'Real-time crypto and MOEX market screener with order book density map and trader journal.',
       },
       {
-        name: 'Digital business card',
+        name: 'Digital business card (test assignment)',
         url: `${GITHUB}/digital-card`,
-        description: 'This GraphQL API: NestJS, Prisma, PostgreSQL, Docker.',
+        description: 'The GraphQL API you are querying right now: NestJS, Prisma, PostgreSQL, Docker. Built as a test assignment together with Claude Code.',
       },
     ],
   },
@@ -109,9 +109,9 @@ export const seedByLocale: Record<
         description: 'Скринер крипто- и московского рынка в реальном времени с картой плотностей стакана и дневником трейдера.',
       },
       {
-        name: 'Цифровая визитка',
+        name: 'Цифровая визитка (тестовое задание)',
         url: `${GITHUB}/digital-card`,
-        description: 'Этот GraphQL API: NestJS, Prisma, PostgreSQL, Docker.',
+        description: 'GraphQL API, который вы сейчас запрашиваете: NestJS, Prisma, PostgreSQL, Docker. Сделан как тестовое задание вместе с Claude Code.',
       },
     ],
   },
