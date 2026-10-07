@@ -19,7 +19,7 @@ export class ProfileResolver {
   ) {}
 
   @Query(() => ProfileModel)
-  profile(@Args('locale', { type: () => Locale, defaultValue: Locale.EN }) locale: Locale) {
+  profile(@Args('locale', { type: () => Locale, defaultValue: Locale.RU }) locale: Locale) {
     return this.profiles.getMain(locale);
   }
 

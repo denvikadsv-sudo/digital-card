@@ -12,7 +12,7 @@ export class ProfileService {
     const profile = await this.prisma.profile.findUnique({
       where: { slug_locale: { slug: DEFAULT_PROFILE_SLUG, locale } },
     });
-    if (!profile) throw new NotFoundException(`Profile (${locale}) is not seeded yet`);
+    if (!profile) throw new NotFoundException(`Профиль (${locale}) ещё не загружен в базу`);
     return profile;
   }
 }

@@ -7,7 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ProfileModule } from './profile/profile.module';
 
 // Opens Apollo Sandbox with a ready query: switch the language by editing the `locale` variable (EN / RU).
-const SANDBOX_QUERY = `query Profile($locale: Locale = EN) {
+const SANDBOX_QUERY = `query Profile($locale: Locale = RU) {
   profile(locale: $locale) {
     name
     title
@@ -36,7 +36,7 @@ const SANDBOX_QUERY = `query Profile($locale: Locale = EN) {
           embed: true,
           includeCookies: false,
           document: SANDBOX_QUERY,
-          variables: { locale: 'EN' },
+          variables: { locale: 'RU' },
         }),
       ],
     }),

@@ -1,15 +1,17 @@
-# Digital business card
+# Цифровая визитка
 
-GraphQL API about me: profile, skills, experience and projects.
+GraphQL API обо мне: профиль, навыки, опыт и проекты.
 NestJS (code-first GraphQL, Apollo Server) + Prisma + PostgreSQL + Docker.
 
-## Run from scratch
+Работает: <https://card.siftx.io/graphql>
+
+## Запуск с нуля
 
 ```bash
 docker compose up --build
 ```
 
-On start the container applies Prisma migrations and seeds the database (idempotent), then starts the API.
+При старте контейнер применяет миграции Prisma и заполняет базу (идемпотентно), затем запускает API.
 Apollo Sandbox: <http://localhost:3000/graphql>
 
 ```graphql
@@ -24,31 +26,32 @@ query {
 }
 ```
 
-Content is available in English (default) and Russian: `profile(locale: RU) { ... }`.
+Данные доступны на русском (по умолчанию) и английском: `profile(locale: EN) { ... }`.
+Names of schema fields are English by design.
 
-## Local development
+## Локальная разработка
 
 ```bash
-cp .env.example .env        # DATABASE_URL must point to a running PostgreSQL
+cp .env.example .env        # DATABASE_URL должен указывать на работающий PostgreSQL
 npm install
 npm run bootstrap           # prisma migrate deploy && prisma db seed
 npm run start:dev
 ```
 
-## Structure
+## Структура
 
 ```
 prisma/
-  schema.prisma, migrations/   data model and SQL migrations
-  seed-data.ts                 my data in every locale (edit this file)
-  seed.ts                      idempotent seeding: upsert profile, replace children in a transaction
+  schema.prisma, migrations/   модель данных и SQL-миграции
+  seed-data.ts                 мои данные на каждом языке (править здесь)
+  seed.ts                      идемпотентное наполнение: upsert профиля, замена дочерних записей в транзакции
 src/
-  prisma/                      global PrismaService
-  profile/                     Query.profile and field resolvers for nested data
-  skills/ experience/ projects/   one module per entity: GraphQL model + service (the only layer that talks to Prisma)
+  prisma/                      глобальный PrismaService
+  profile/                     Query.profile и field-резолверы вложенных данных
+  skills/ experience/ projects/   по модулю на сущность: GraphQL-модель + сервис (единственный слой, работающий с Prisma)
 ```
 
-- Resolvers contain no queries: they delegate to services.
-- `skills`, `experience` and `projects` are `@ResolveField`s: they hit the database only when the client selects them.
-- `endDate: null` means the position is current.
-- Localization: `Profile` is unique per `(slug, locale)` and owns its own skills, experience and projects, so adding a language is a new entry in `prisma/seed-data.ts` plus a `Locale` enum value.
+- В резолверах нет запросов к БД: они делегируют сервисам.
+- `skills`, `experience`, `projects` — `@ResolveField`: в базу идёт запрос только если клиент их запросил.
+- `endDate: null` означает текущее место работы.
+- Локализация: `Profile` уникален по `(slug, locale)` и владеет своими навыками, опытом и проектами. Чтобы добавить язык, нужно значение в enum `Locale` и запись в `prisma/seed-data.ts`.
