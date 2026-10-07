@@ -32,7 +32,6 @@ describe('GraphQL profile (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
-    process.env.DATABASE_URL = 'postgresql://test:test@localhost:5432/test';
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
       .overrideProvider(PrismaService)
       .useValue(prismaFake)
