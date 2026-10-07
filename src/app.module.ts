@@ -6,6 +6,21 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { PrismaModule } from './prisma/prisma.module';
 import { ProfileModule } from './profile/profile.module';
 
+// Opens Apollo Sandbox with a ready query: switch the language by editing the `locale` variable (EN / RU).
+const SANDBOX_QUERY = `query Profile($locale: Locale = EN) {
+  profile(locale: $locale) {
+    name
+    title
+    description
+    github
+    telegram
+    skills { name category }
+    experience { company position startDate endDate achievements }
+    projects { name url description }
+  }
+}
+`;
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -16,7 +31,14 @@ import { ProfileModule } from './profile/profile.module';
       introspection: true,
       playground: false, // the legacy Playground is replaced by Apollo Sandbox below
       // Apollo Sandbox at /graphql, also in production: the app is a public showcase.
-      plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true, includeCookies: false })],
+      plugins: [
+        ApolloServerPluginLandingPageLocalDefault({
+          embed: true,
+          includeCookies: false,
+          document: SANDBOX_QUERY,
+          variables: { locale: 'EN' },
+        }),
+      ],
     }),
     PrismaModule,
     ProfileModule,
