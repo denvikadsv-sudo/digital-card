@@ -40,7 +40,8 @@ export const seedByLocale: Record<
       description:
         'Founder and sole developer of SiftX, a real-time crypto and MOEX market screener. ' +
         'I build Node.js backends with WebSockets, Redis and PostgreSQL, and I develop with an AI agent (Claude Code) ' +
-        'as a working tool: I define the architecture and requirements, review the result and operate it in production.',
+        'as a working tool: I define the architecture and requirements, review the result and operate it in production. ' +
+        'AI agents let me bring tasks to production faster; I stay responsible for architecture, review and operations.',
       github: GITHUB,
       linkedin: null,
       telegram: TELEGRAM,
@@ -81,7 +82,8 @@ export const seedByLocale: Record<
       description:
         'Основатель и единственный разработчик SiftX, скринера крипто- и московского рынка в реальном времени. ' +
         'Пишу Node.js-бэкенды с WebSocket, Redis и PostgreSQL. Работаю с ИИ-агентом (Claude Code) как с инструментом: ' +
-        'сам задаю архитектуру и требования, проверяю результат и эксплуатирую сервис в продакшене.',
+        'сам задаю архитектуру и требования, проверяю результат и эксплуатирую сервис в продакшене. ' +
+        'ИИ-агенты помогают мне быстрее доводить задачи до продакшена; за архитектуру, проверку и эксплуатацию отвечаю я.',
       github: GITHUB,
       linkedin: null,
       telegram: TELEGRAM,
